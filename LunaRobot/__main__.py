@@ -74,41 +74,45 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-[🌻](https://telegra.ph/file/e38e9af544bafa53a3b3b.jpg) `ʜᴀɪ ᴛʜᴇʀᴇ ɪ'ᴍ` [ʟᴜɴᴀ.](https://t.me/lunatapibot)
-════════════════════════
-`ʟᴜɴᴀ ɪs sᴘᴇᴄɪᴀʟʟʏ ᴍᴀᴅᴇ ʙʏ` [ᴢᴇɪɴᴢᴏ](https://t.me/zeinzo_1) `ᴛᴏ ᴋᴇᴇᴘ ᴡᴏᴍᴇɴ ᴀᴡᴀʏ ғʀᴏᴍ ᴛʜᴇ ᴍɪʟʟɪᴏɴs ᴏғ ʙᴀᴅ ɢᴜʏs ɪɴ ᴛʜᴇ ɢʀᴏᴜᴘ`
-════════════════════════
-`Click the button below to learn more how to use me.`
-════════════════════════
+╭──────────────
+**Hey**🤞 {}, I am ᴀᴋꜱʜɪ🥀🍃☘️
+**I am an Advanced Group Manager Bot, With Lots of Cool Features❤️.**
+`For More Information Use the Button Below or Send` /help 
+╰──────────────
 """
 
 buttons = [
         [
         InlineKeyboardButton(
-            text="➕️ ᴀᴅᴅ ʟᴜɴᴀ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/lunatapibot?startgroup=true"),
+            text="𝐀𝐝𝐝 𝐌𝐞 𝐍𝐨𝐰➕️", url="t.me/Miss_Akshi_bot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Luna_"),
+        InlineKeyboardButton(text="𝐇𝐨𝐰 𝐭𝐨 𝐒𝐭𝐚𝐫𝐭❓", callback_data="Howto_"),
+    ],
+    [
         InlineKeyboardButton(
-            text="ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/aboutraks"
+            text="𝐔𝐩𝐝𝐚𝐭𝐞𝐬🤞", url=f"https://t.me/phoenix_music_new"
+        ),
+        InlineKeyboardButton(
+            text="𝐒𝐮𝐩𝐩𝐨𝐫𝐭😍", url=f"https://t.me/phoenix_music_suport"
         ),
     ],
     [
-        InlineKeyboardButton(text="ʜᴇʟᴘ & ᴄᴏᴍᴍᴀɴᴅꜱ❔", callback_data="help_back"),
+        InlineKeyboardButton(text="𝐇𝐞𝐥𝐩 𝐀𝐧𝐝 𝐂𝐌𝐃𝐬❓", callback_data="help_back"),
     ],
 ]
 
 
 HELP_STRINGS = """
-`ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴꜱ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ꜱᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇꜱ`[.](https://telegra.ph/file/e38e9af544bafa53a3b3b.jpg)
+`Click Buttons Below to Know My Features and CMDs...`
 """
 
-Luna_IMG = "https://telegra.ph/file/e38e9af544bafa53a3b3b.jpg"
+LIVVY_IMG = "https://telegra.ph/file/a9443b6240df15ccd0424.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project [zeinzo](t.me/zeinzo_1) \
- Supporting isnt always financial! [All about music](t.me/lunasupportgroup) \
- Those who cannot provide monetary support are welcome to help us develop the bot at ."""
+ You can support the project via [Paypal](#) or by contacting @akshi_s_ashu1 \
+ Supporting isnt always financial! \
+ Those who cannot provide monetary support are welcome to help us develop the bot at."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -193,7 +197,7 @@ def start(update: Update, context: CallbackContext):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back")]]
+                        [[InlineKeyboardButton(text="Back🔙", callback_data="help_back")]]
                     ),
                 )
 
@@ -210,15 +214,17 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            update.effective_message.reply_text(
-                PM_START_TEXT,
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_animation(
+                LIVVY_IMG,
+                caption=PM_START_TEXT.format(escape_markdown(first_name), OWNER_ID),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
             )
     else:
         update.effective_message.reply_text(
-            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+            "Hey🤞, I am ᴀᴋꜱʜɪ🥀🍃☘️.\n<b>Uptime:</b> <code>{}</code>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,
@@ -307,7 +313,7 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="Back🔙", callback_data="help_back")]]
                 ),
             )
 
@@ -348,30 +354,22 @@ def help_button(update, context):
         pass
 
 
+
 @run_async
-def Luna_about_callback(update, context):
+def livvy_howto_callback(update, context):
     query = update.callback_query
-    if query.data == "Luna_":
+    if query.data == "Howto_":
         query.message.edit_text(
-            text="""  ᴀ ᴘᴏᴡᴇʀғᴜʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ʙᴜɪʟᴛ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇᴀsɪʟʏ.
-                 \n I can restrict users.
-                 \n I can greet users with customizable welcome messages and even set a group's rules.
-                 \n I have an advanced anti-flood system.
-                 \n I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
-                 \n I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
-                 \n I check for admins' permissions before executing any command and more stuffs
-                 \n\n_Luna's licensed under the GNU General Public License v3.0_
-                 \n❍ Awesome Bots @aboutraks
-                 \n❍ Support Group @lunasupportgroup
-                 \n❍ Assistant @LunaAssistant.
-                 \nHere is the 💾[Repository.](https://github.com/zeinzo)""",
+            text="""**Here's Help regarding How to Start❓**
+1. `Firstly Add [Me](t.me/Miss_Akshi_bot?startgroup=true) to your group and`
+2. `After Adding Promote me Manually with Full Rights for Faster Experience.`
+3. `Than Send` `/admincache@Miss_Akshi_bot` `in that Chat to Refresh Admin List in My Database.`""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                [
                 [
-                 
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back")
+                    InlineKeyboardButton(text="Back🔙", callback_data="help_back")
                  ]
                 ]
             ),
@@ -391,14 +389,14 @@ def Source_about_callback(update, context):
     query = update.callback_query
     if query.data == "source_":
         query.message.edit_text(
-            text=""" `heyo i'm flicks`
-                 \nHere is the [Source Code](https://github.com/ridho17-ind/Flicks-Robot) .""",
+            text="""Hi..🤗 I'm *ᴀᴋꜱʜɪ*
+                 \nHere is the [Source Code](https://github.com/Noob-kittu/YoneRobot) .""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="source_back")
+                    InlineKeyboardButton(text="Back🔙", callback_data="source_back")
                  ]
                 ]
             ),
@@ -427,7 +425,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="ʜᴇʟᴘ?",
+                                text="Help❓",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -443,7 +441,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="ʜᴇʟᴘ?",
+                            text="Help❓",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -464,7 +462,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="[ ʙᴀᴄᴋ ]", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="Back🔙", callback_data="help_back")]]
             ),
         )
 
@@ -537,7 +535,7 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="[ ʙᴀᴄᴋ ]",
+                                text="Back🔙",
                                 callback_data="stngs_back({})".format(chat_id),
                             )
                         ]
@@ -687,7 +685,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "Yes i'm alive")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "ᴀᴋꜱʜɪ🥀🍃☘️ is Back on Fire🔥")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
@@ -704,7 +702,7 @@ def main():
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    about_callback_handler = CallbackQueryHandler(Luna_about_callback, pattern=r"Luna_")
+    howto_callback_handler = CallbackQueryHandler(livvy_howto_callback, pattern=r"Howto_")
     source_callback_handler = CallbackQueryHandler(Source_about_callback, pattern=r"source_")
 
     donate_handler = CommandHandler("donate", donate)
@@ -713,7 +711,7 @@ def main():
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
-    dispatcher.add_handler(about_callback_handler)
+    dispatcher.add_handler(howto_callback_handler)
     dispatcher.add_handler(source_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
