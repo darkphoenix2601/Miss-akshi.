@@ -21,7 +21,7 @@ aiohttp
 Pillow>=4.2.0
 CurrencyConverter
 tzlocal~=2.0
-#googletrans
+googletrans
 google_trans_new
 jikanpy
 speedtest-cli
@@ -71,3 +71,7 @@ nudepy
 motor
 cloudscraper
 opencv-python-headless
+
+PyYAML>=5.3.1
+loguru
+google_translator
